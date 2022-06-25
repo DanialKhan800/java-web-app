@@ -1,18 +1,19 @@
-FROM adoptopenjdk/openjdk11:alpine-slim as build
-WORKDIR /workspace/app
+FROM maven:3.6-jdk-11-slim as BUILD
+COPY . /src
+WORKDIR /src
+RUN mvn package
 
-COPY mvnw .
-COPY .mvn .mvn
-COPY pom.xml .
-COPY src src
+FROM openjdk:11.0.1-jre-slim-stretch
+EXPOSE 9090
+WORKDIR /app
+#ARG JAR=spring-petclinic-2.7.0-SNAPSHOT.jar
 
-RUN ./mvnw install -DskipTests
-RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
+COPY --from=BUILD /src/target/*.jar ./app.jar
+ENTRYPOINT ["java","-jar","./app.jar","--server.port=","9090"]
 
-FROM adoptopenjdk/openjdk11:alpine-slim
-VOLUME /tmp
-ARG DEPENDENCY=/workspace/app/target/dependency
-COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
-COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
-COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
-ENTRYPOINT ["java","-Dserver.port=${PORT}","-cp","app:app/lib/*","com.example.demo.DemoApplication"]
+
+
+
+
+
+
