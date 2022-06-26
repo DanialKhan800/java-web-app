@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: spring-boot-k8s
-          image: danialkhan1221/java-springboot-app:2.0
+          image: danialkhan1221/java-springboot-app
           
           imagePullPolicy: IfNotPresent
           ports:
