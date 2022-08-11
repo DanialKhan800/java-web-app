@@ -25,7 +25,7 @@ jobs:
     - name: Test code
       run: mvn test
       
-      
+      if: ${{ github.ref == 'refs/heads/main' }} 
     - name: Upload JAR
       run: ls 
      
