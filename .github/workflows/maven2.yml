@@ -1,9 +1,7 @@
 name: Github Actions Task
 
 on:
-  push:
-    branches:
-      - "**"
+  push
 
 jobs:
   build-test:
