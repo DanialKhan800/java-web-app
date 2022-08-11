@@ -26,13 +26,9 @@ jobs:
     - name: Test code
       run: mvn test
 
-    - name: Upload JAR
-      uses: actions/upload-artifact@v3
-      with:
-        name: artifact
-        path: target/*.jar
+    
 
-  Publish artifact:
+  Publish-artifact:
     runs-on: ubuntu-latest
 
     steps:
@@ -49,14 +45,12 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: java-artifact
-        path: target 
+        path: ./
 
   Docker-build-push:
     runs-on: ubuntu-latest
     
     steps:
     - uses: actions/checkout@v3
-
-   
     - name: Docker Image build
       run: docker image build -t java-example:latest .  
