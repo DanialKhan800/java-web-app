@@ -32,8 +32,9 @@ jobs:
 
  
 
-  Publish-artifact-build-image:
+  Release-artifact-build-image-Push-ECR:
     runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/master' }} 
 
     steps:
     - uses: actions/checkout@v3
@@ -46,12 +47,7 @@ jobs:
     
     - name: Docker Image build
       run: docker image build -t java-example:latest . 
-
-  AWS-ECR-Login:
-    runs-on: ubuntu-latest
-    
-    steps:
-    
+ 
     - name: AWS credentials setup
       uses: aws-actions/configure-aws-credentials@v1
       with:
