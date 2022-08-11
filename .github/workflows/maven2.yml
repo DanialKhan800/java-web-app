@@ -34,7 +34,7 @@ jobs:
 
     
 
-  Publish-artifact:
+  Publish-artifact-build-image:
     runs-on: ubuntu-latest
 
     steps:
@@ -45,11 +45,13 @@ jobs:
       with:
         name: artifact
         path: ./
+    
+    - name: Docker Image build
+      run: docker image build -t java-example:latest . 
 
   Docker-build-push:
     runs-on: ubuntu-latest
     
     steps:
     - uses: actions/checkout@v3
-    - name: Docker Image build
-      run: docker image build -t java-example:latest .  
+     
