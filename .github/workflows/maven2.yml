@@ -27,7 +27,7 @@ jobs:
       
     - name: Upload JAR
       run: ls 
-      if: ${{ github.ref == 'refs/heads/master' }} 
+      if: ${{ github.ref == 'refs/heads/main' }} 
 
 
  
