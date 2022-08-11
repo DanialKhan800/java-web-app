@@ -24,10 +24,11 @@ jobs:
       
     - name: Test code
       run: mvn test
-    
+      
+      if: ${{ github.ref == 'refs/heads/main' }}
     - name: Upload JAR
     - run: echo I will only run on the master branch
-      if: ${{ github.ref == 'refs/heads/main' }}
+   
 
  
 
