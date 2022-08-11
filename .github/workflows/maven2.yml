@@ -2,9 +2,7 @@ name: Github Actions Task
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+   # branches: [ "*" ]
 
 jobs:
   build-test:
@@ -21,7 +19,9 @@ jobs:
         cache: maven
 
     - name: Build with Maven
-      run: mvn clean package
+      run: | 
+        mvn clean package
+        ls ./target
       
     - name: Test code
       run: mvn test
@@ -74,3 +74,4 @@ jobs:
       run: |
         docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
         docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+on:
