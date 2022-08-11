@@ -27,7 +27,7 @@ jobs:
       
       if: ${{ github.ref == 'refs/heads/main' }}
     - name: Upload JAR
-    - run: echo I will only run on the master branch
+    - run: ls
    
 
  
