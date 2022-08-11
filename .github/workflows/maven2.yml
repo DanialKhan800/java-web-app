@@ -25,6 +25,12 @@ jobs:
       
     - name: Test code
       run: mvn test
+    
+    - name: Upload JAR
+      uses: actions/upload-artifact@v2
+      with:
+        name: artifact
+        path: target/*.jar
 
     
 
@@ -34,17 +40,10 @@ jobs:
     steps:
     - uses: actions/checkout@v3
    
-    - name: Upload JAR
-      uses: actions/upload-artifact@v2
-      with:
-        name: java-artifact
-        path: target/*.jar
-
-
     - name: Add JAR File
       uses: actions/download-artifact@v1
       with:
-        name: java-artifact
+        name: artifact
         path: ./
 
   Docker-build-push:
