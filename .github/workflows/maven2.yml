@@ -26,6 +26,15 @@ jobs:
     - name: Test code
       run: mvn test
 
+  Artifact-release:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Artifact release 
+      run: mvn clean deploy -DskipTests
+      env: 
+        github-token: ${{secrets.TOKEN_GIT}}
+
   Docker-build-push:
     runs-on: ubuntu-latest
     
