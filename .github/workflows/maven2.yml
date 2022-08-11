@@ -28,12 +28,8 @@ jobs:
     - name: Upload JAR
     - run: echo I will only run on the master branch
       if: ${{ github.ref == 'refs/heads/main' }}
-    #  uses: actions/upload-artifact@v2
-     # with:
-      #  name: artifact
-       # path: target/*.jar
 
-    
+ 
 
   Publish-artifact-build-image:
     runs-on: ubuntu-latest
